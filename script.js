@@ -1,29 +1,20 @@
+// Data de início do relacionamento (05/07/2024 às 19h00)
+const dataInicio = new Date('2024-07-05T19:00:00');
+
+// Função que calcula o tempo desde a data de início
 function calcularTempo() {
-    // Pega a data inserida pelo usuário
-    var dataInicio = document.getElementById("startDate").value;
+    const agora = new Date();
+    const tempo = agora - dataInicio;
 
-    // Verifica se o campo não está vazio
-    if (!dataInicio) {
-        alert("Por favor, insira uma data válida.");
-        return;
-    }
+    // Calculando o tempo em anos, meses e dias
+    const anos = Math.floor(tempo / (1000 * 60 * 60 * 24 * 365));
+    const meses = Math.floor((tempo % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+    const dias = Math.floor((tempo % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
 
-    // Converte a data para um objeto Date
-    var dataInicioObj = new Date(dataInicio);
-
-    // Pega a data atual
-    var dataAtual = new Date();
-
-    // Calcula a diferença entre as datas
-    var diferenca = dataAtual - dataInicioObj;
-
-    // Converte a diferença para dias
-    var dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-    var anos = Math.floor(dias / 365);
-    dias = dias % 365;
-    var meses = Math.floor(dias / 30);
-    dias = dias % 30;
-
-    // Exibe o resultado
-    document.getElementById("resultado").innerHTML = `Vocês estão juntos há ${anos} anos, ${meses} meses e ${dias} dias.`;
+    // Atualizando o resultado no HTML
+    const resultado = document.getElementById('resultado');
+    resultado.innerHTML = `Já se passaram ${anos} anos, ${meses} meses e ${dias} dias desde o início do nosso relacionamento!`;
 }
+
+// Chama a função quando a página carrega
+window.onload = calcularTempo;
